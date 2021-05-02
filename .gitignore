@@ -1,0 +1,8 @@
+.DS_Store
+<<<<<<< HEAD
+=======
+forward.code-workspace
+>>>>>>> panel
+tailwind.config.js
+node_modules/
+.clj-kondo/

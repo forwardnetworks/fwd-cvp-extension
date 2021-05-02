@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto&display=swap" rel="stylesheet">
+</head>
+<script src="options.js"></script>
+
+
+<body class="bg-blue-50" style="font-family: Roboto;">
+    <div class="bg-white w-full lg:w-2/3 mx-auto rounded-lg lg:my-20 px-4 py-4 shadow-lg">
+        <div class="bg-gray-100 flex">
+            <img class="object-scale-down m-5" src="icons/forwardlogo48.png">
+            <div class="text-1xl text-gray-800 py-8">Forward Extension Configuration</div>
+        </div>
+        <div class="block mt-2 ml-2">
+            <span class="font-bold text-gray-800">Forward User:</span>
+            <input id=fwd_user type='text' placeholder="Forward Username"
+                class="w-full mb-3 px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" />
+        </div>
+        <div class="block mt-2 ml-2">
+            <span class="font-bold text-gray-800">Forward Password:</span>
+            <input id=fwd_password type='password' placeholder="Forward Password"
+                class="w-full mb-3 px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" />
+        </div>
+        <div class="block mt-2 ml-2">
+            <span class="font-bold text-gray-800">Arista CloudVision Portal:</span>
+            <input id=cvp type='text' placeholder="CloudVision Portal URL"
+                class="w-full mb-3 px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:border-green-500" />
+        </div>
+
+        <div class="flex justify-center my-6">
+            <button id="save" class="text-white h-12 rounded px-6 font-bold" style="background-color:#54b72b">Save
+            </button>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>

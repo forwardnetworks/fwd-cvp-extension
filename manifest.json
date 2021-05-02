@@ -1,0 +1,31 @@
+{
+  "name": "Forward Networks CloudVision Extension",
+  "version": "1.0",
+  "description": "Forward Enterprise and Arista CloudVision Integration",
+  "icons": {
+    "48": "icons/forwardlogo48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.forwardnetworks.com/*",
+        "https://fwd.app/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "options_ui": {"page": "options.html"}, 
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "extension@gaberger.github.com"
+    }
+  }
+}
