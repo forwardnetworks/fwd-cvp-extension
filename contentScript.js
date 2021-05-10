@@ -49,27 +49,45 @@ const getKey = (key) => {
 }
 
 async function getSerialNumber(device) {
+    const nqe = `foreach device in network.devices 
+                   where device.name == "${device}"
+                   let platform = device.platform 
+                   foreach component in platform.components 
+                   where component.name == "System Chassis" 
+                   select {serialNumber: component.serialNumber}`
+
     const pattern = /https:\/\/(\w+\.\w+:\d+|\w+\.\w+).*networkId=(\d+).*snapshotId=(\d+)/
     if (pattern.test(window.location.href)) {
-        const results = pattern.exec(window.location.href)
-        const fwdUrl = "https://" + results[1] + "/api/snapshots/" + results[3] + "/devices/" + device + "/files/version"
         const user = (await getKey('fwd_user')).fwd_user
         const pass = (await getKey('fwd_password')).fwd_password
+        let fwdBody = {
+            query: nqe,
+            queryOptions: {
+                limit: 1,
+                offset: 0
+            }
+        }
+        const results = pattern.exec(window.location.href)
+        let fwdUrl = "https://" + results[1] + "/api/nqe?networkId=" + results[2]
         const intRequest = new Request(fwdUrl, {
-            method: 'GET'
+            method: 'POST',
+            body: JSON.stringify(fwdBody),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
         })
         intRequest.headers.append('Authorization', 'Basic ' + btoa(user + ":" + pass))
         const response = await fetch(intRequest)
         if (response.ok) {
-            const file = await response.text()
-            const serialPattern = /Serial number:\s+(\w+)/m
-            const serial = file.match(serialPattern)
-            console.log("Found Serial:" + serial[1])
-            return serial[1]
+            const resp = await response.json()
+            return resp.items[0].serialNumber
         }
         else {
-            throw ("API error")
+            console.log(response)
         }
     }
     else { console.log("Error parsing HREF " + window.location.href) }
 }
+
+
+
