@@ -64,7 +64,7 @@ async function updateInterfaceCard(device, intf, container) {
     const serial = await getSerialNumber(device)
     const fwdInterface = await resolveInterface(device, intf)
     console.log(fwdInterface)
-    const cvpResource = cvpLink + "/cv/devices/interface-overview/" + serial + "/" + fwdInterface
+    const cvpResource = cvpLink + "/cv/devices/interface-overview/" + serial + "/" + encodeURIComponent(fwdInterface)
     const panel = `<button id="hideshow" class="lnk" style=" background: none!important;
     border: none;
     padding: 0!important;
